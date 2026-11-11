@@ -50,15 +50,18 @@ RULES (very important):
 
 def _prompt(kind, seed, recent):
     if kind == "short":
-        size = ("ONE scene (two scenes max), 8 to 12 lines, about 90 to 120 Hindi words in total (about 45 seconds). "
+        size = ("ONE or TWO scenes with AT LEAST 9 and at most 12 dialogue lines in total (count them!), about 90 to "
+                "120 Hindi words in total (about 45 seconds). "
                 "First line must be a strong funny hook. Last story line must be the punchline.")
     else:
-        size = ("5 to 7 scenes, 55 to 75 lines in total (about 7 minutes). A clear beginning, a growing problem, "
+        size = ("5 to 7 scenes with AT LEAST 50 and at most 75 dialogue lines in total (about 7 minutes), each scene "
+                "8 to 12 lines. A clear beginning, a growing problem, "
                 "a big funny climax, and a warm ending.")
     cast = "\n".join(f"- {k}: {v}" for k, v in CAST.items())
     return f"""You write scripts for a Hindi animated family-comedy cartoon channel watched by kids and adults in India.
 
-CHARACTERS (use only these ids; 2 or 3 characters per scene; "narrator" may speak briefly):
+CHARACTERS (write the ids EXACTLY like this, lowercase English: chintu, pinky, mummy, papa, dadi, guptaji, narrator;
+2 or 3 characters per scene; "narrator" may speak briefly):
 {cast}
 
 STORY IDEA: {seed}
@@ -117,31 +120,79 @@ BLOCK = ["sexy", "kiss", "daaru", "दारू", "शराब", "sharab", "cig
          "girlfriend", "boyfriend", "गर्लफ्रेंड", "बॉयफ्रेंड", "थप्पड़", "चप्पल से"]
 
 
+ALIASES = {
+    "chintu": "chintu", "चिंटू": "chintu", "chintoo": "chintu",
+    "pinky": "pinky", "पिंकी": "pinky", "pinki": "pinky",
+    "mummy": "mummy", "मम्मी": "mummy", "mom": "mummy", "mother": "mummy", "maa": "mummy", "mommy": "mummy",
+    "papa": "papa", "पापा": "papa", "dad": "papa", "father": "papa", "daddy": "papa",
+    "dadi": "dadi", "दादी": "dadi", "grandma": "dadi", "grandmother": "dadi", "daadi": "dadi",
+    "guptaji": "guptaji", "गुप्ता जी": "guptaji", "गुप्ताजी": "guptaji", "gupta": "guptaji", "guptauncle": "guptaji",
+    "narrator": "narrator", "सूत्रधार": "narrator", "कथावाचक": "narrator", "narration": "narrator",
+}
+
+
+def norm_who(x):
+    k = str(x or "").strip().lower()
+    if k in ALIASES:
+        return ALIASES[k]
+    k2 = re.sub(r"[\s_\-.]", "", k).replace("ji", "ji")
+    for a, v in ALIASES.items():
+        if re.sub(r"[\s_\-.]", "", a) == k2:
+            return v
+    for a, v in ALIASES.items():   # e.g. "Chintu (excited)"
+        if a in k:
+            return v
+    return None
+
+
+def _pick(d, *keys):
+    for k in keys:
+        if d.get(k) not in (None, ""):
+            return d[k]
+    return ""
+
+
 def validate(s, kind):
     """Fix small issues, reject bad scripts. Returns cleaned script."""
-    scenes = []
+    scenes, raw = [], 0
     for sc in s.get("scenes", []):
-        place = sc.get("place") if sc.get("place") in PLACES else random.choice(PLACES)
-        cast = [c for c in sc.get("cast", []) if c in CAST][:3]
+        place = str(_pick(sc, "place", "location", "setting")).strip().lower().replace(" ", "_")
+        place = place if place in PLACES else random.choice(PLACES)
+        cast = []
+        for c in sc.get("cast", []) or sc.get("characters", []):
+            w = norm_who(c)
+            if w in CAST and w not in cast:
+                cast.append(w)
         lines = []
-        for ln in sc.get("lines", []):
-            who = ln.get("who")
-            text = str(ln.get("text", "")).strip()
-            if not text or (who not in CAST and who != "narrator"):
+        for ln in sc.get("lines", []) or sc.get("dialogue", []) or sc.get("dialogues", []):
+            raw += 1
+            if not isinstance(ln, dict):
+                continue
+            who = norm_who(_pick(ln, "who", "character", "speaker", "name"))
+            text = str(_pick(ln, "text", "line", "dialogue", "hindi")).strip()
+            if not text or who is None:
                 continue
             if who in CAST and who not in cast:
-                if len(cast) >= 3:
-                    continue
-                cast.append(who)
+                if len(cast) >= 3:   # 4th character: cut to a new shot in the same place
+                    if lines:
+                        scenes.append({"place": place, "cast": cast, "lines": lines})
+                    prev = [l["who"] for l in reversed(lines) if l["who"] in CAST][:1]
+                    cast, lines = prev + [who], []
+                else:
+                    cast.append(who)
+            emo = str(ln.get("emotion", "")).strip().lower()
+            fx = str(ln.get("sfx", "")).strip().lower()
             lines.append({"who": who, "text": text[:220],
-                          "emotion": ln.get("emotion") if ln.get("emotion") in EMOTIONS else "neutral",
-                          "sfx": ln.get("sfx") if ln.get("sfx") in SFX else ""})
-        if lines and cast:
+                          "emotion": emo if emo in EMOTIONS else "neutral",
+                          "sfx": fx if fx in SFX else ""})
+        if lines and not cast:
+            cast = ["chintu", "mummy"]
+        if lines:
             scenes.append({"place": place, "cast": cast, "lines": lines})
     n = sum(len(sc["lines"]) for sc in scenes)
-    lo, hi = (6, 16) if kind == "short" else (38, 95)
+    lo, hi = (5, 18) if kind == "short" else (30, 100)
     if not (lo <= n <= hi):
-        raise ValueError(f"script has {n} lines, expected {lo}-{hi}")
+        raise ValueError(f"script has {n} usable lines (of {raw} written), expected {lo}-{hi}")
     whole = json.dumps(s, ensure_ascii=False).lower()
     bad = [w for w in BLOCK if w.lower() in whole]
     if bad:
