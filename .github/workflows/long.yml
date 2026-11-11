@@ -12,7 +12,7 @@ concurrency: cartoon-long
 
 jobs:
   make:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
@@ -21,8 +21,15 @@ jobs:
           python-version: "3.12"
           cache: pip
       - name: Install tools
+        timeout-minutes: 20
         run: |
-          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-noto-core fonts-freefont-ttf
+          # Retry up to 3 times: GitHub's servers sometimes can't reach Ubuntu's package site for a few minutes
+          for i in 1 2 3; do
+            sudo timeout 300 apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 update -qq && \
+            sudo timeout 600 apt-get -o Acquire::Retries=3 install -y -qq ffmpeg fonts-noto-core fonts-freefont-ttf && break
+            if [ "$i" -eq 3 ]; then echo "Package install failed 3 times"; exit 1; fi
+            echo "Package install failed (try $i), waiting 30 seconds..."; sleep 30
+          done
           pip install -r requirements.txt
       - name: Make and upload
         env:
