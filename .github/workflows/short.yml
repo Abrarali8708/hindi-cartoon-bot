@@ -22,16 +22,18 @@ jobs:
           python-version: "3.12"
           cache: pip
       - name: Install tools
-        timeout-minutes: 20
+        timeout-minutes: 10
         run: |
-          # Retry up to 3 times: GitHub's servers sometimes can't reach Ubuntu's package site for a few minutes
-          for i in 1 2 3; do
-            sudo timeout 300 apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 update -qq && \
-            sudo timeout 600 apt-get -o Acquire::Retries=3 install -y -qq ffmpeg fonts-noto-core fonts-freefont-ttf && break
-            if [ "$i" -eq 3 ]; then echo "Package install failed 3 times"; exit 1; fi
-            echo "Package install failed (try $i), waiting 30 seconds..."; sleep 30
-          done
-          pip install -r requirements.txt
+          # No Ubuntu package servers needed: ffmpeg comes from PyPI, the Hindi font from GitHub
+          pip install -r requirements.txt imageio-ffmpeg
+          sudo ln -sf "$(python -c 'import imageio_ffmpeg; print(imageio_ffmpeg.get_ffmpeg_exe())')" /usr/local/bin/ffmpeg
+          ffmpeg -hide_banner -version | head -n 1
+          mkdir -p assets/fonts
+          curl -fsSL --retry 5 --retry-all-errors --max-time 60 -o assets/fonts/Hindi-Bold.ttf \
+            https://raw.githubusercontent.com/notofonts/notofonts.github.io/main/fonts/NotoSansDevanagari/hinted/ttf/NotoSansDevanagari-Bold.ttf \
+          || { echo "Font download failed, trying Ubuntu packages"; rm -f assets/fonts/Hindi-Bold.ttf; \
+               sudo timeout 240 apt-get update -qq; sudo timeout 240 apt-get install -y -qq fonts-noto-core; }
+          ls -l assets/fonts/ /usr/share/fonts/truetype/noto/NotoSansDevanagari-Bold.ttf 2>/dev/null || true
       - name: Make and upload
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
