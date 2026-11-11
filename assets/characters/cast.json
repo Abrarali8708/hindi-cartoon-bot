@@ -1,0 +1,26 @@
+{
+ "chintu": {
+  "scale": 0.8,
+  "kind": "kid"
+ },
+ "pinky": {
+  "scale": 0.74,
+  "kind": "girl"
+ },
+ "mummy": {
+  "scale": 1.0,
+  "kind": "woman"
+ },
+ "papa": {
+  "scale": 1.03,
+  "kind": "man"
+ },
+ "dadi": {
+  "scale": 0.93,
+  "kind": "woman"
+ },
+ "guptaji": {
+  "scale": 1.0,
+  "kind": "man"
+ }
+}

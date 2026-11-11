@@ -1,0 +1,55 @@
+name: Make and upload a cartoon Short
+
+on:
+  schedule:
+    - cron: "0 7 * * *"     # 12:30 PM India
+    - cron: "0 14 * * *"    # 7:30 PM India
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency: cartoon-short
+
+jobs:
+  make:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install tools
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-noto-core fonts-freefont-ttf
+          pip install -r requirements.txt
+      - name: Make and upload
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+        run: python run.py short
+      - name: Save log
+        if: always()
+        run: |
+          git config user.name "cartoon-bot"
+          git config user.email "cartoon-bot@users.noreply.github.com"
+          git add data/history.json
+          git commit -m "Log short" || exit 0
+          for i in 1 2 3; do git pull --rebase -q && git push && break; sleep 5; done
+      - name: Keep the video for 7 days
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: short
+          path: |
+            output/short/*.mp4
+            output/short/*.jpg
+            output/short/script.json
+          retention-days: 7
+          if-no-files-found: ignore

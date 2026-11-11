@@ -1,0 +1,354 @@
+{
+ "title": "पापा की डाइट 😂 | Papa Ki Diet | Hindi Comedy Cartoon",
+ "thumb_text": "पापा की डाइट!",
+ "description": "मम्मी ने पापा की डाइट शुरू करवाई, लेकिन रात को किचन में कुछ और ही हुआ!",
+ "tags": [
+  "hindi cartoon",
+  "papa ki diet",
+  "funny cartoon",
+  "family comedy"
+ ],
+ "moral": "जो नियम हम दूसरों के लिए बनाते हैं, उन्हें खुद भी निभाना चाहिए।",
+ "scenes": [
+  {
+   "place": "living_room",
+   "cast": [
+    "papa",
+    "mummy",
+    "chintu"
+   ],
+   "lines": [
+    {
+     "who": "mummy",
+     "emotion": "angry",
+     "text": "आज से आपकी डाइट शुरू! सिर्फ़ सलाद और नींबू पानी।",
+     "sfx": "pop"
+    },
+    {
+     "who": "papa",
+     "emotion": "sad",
+     "text": "सलाद? मैं इंसान हूँ, खरगोश नहीं!",
+     "sfx": "boing"
+    },
+    {
+     "who": "chintu",
+     "emotion": "laugh",
+     "text": "पापा, खरगोश तो कितने फिट होते हैं!",
+     "sfx": ""
+    },
+    {
+     "who": "mummy",
+     "emotion": "happy",
+     "text": "सुना? बच्चा भी समझ गया।",
+     "sfx": ""
+    },
+    {
+     "who": "papa",
+     "emotion": "neutral",
+     "text": "ठीक है... पर रात को एक छोटा सा समोसा?",
+     "sfx": ""
+    },
+    {
+     "who": "mummy",
+     "emotion": "angry",
+     "text": "एक भी नहीं!",
+     "sfx": "ding"
+    }
+   ]
+  },
+  {
+   "place": "kitchen",
+   "cast": [
+    "papa",
+    "pinky"
+   ],
+   "lines": [
+    {
+     "who": "narrator",
+     "emotion": "neutral",
+     "text": "रात के बारह बजे...",
+     "sfx": "whoosh"
+    },
+    {
+     "who": "papa",
+     "emotion": "surprised",
+     "text": "अरे पिंकी! तुम यहाँ क्या कर रही हो?",
+     "sfx": "gasp"
+    },
+    {
+     "who": "pinky",
+     "emotion": "happy",
+     "text": "मम्मी ने कहा था, जो फ्रिज खोले, उसकी फोटो खींच लेना!",
+     "sfx": ""
+    },
+    {
+     "who": "papa",
+     "emotion": "sad",
+     "text": "पिंकी बेटा, ये फोटो डिलीट कर दो ना...",
+     "sfx": ""
+    },
+    {
+     "who": "pinky",
+     "emotion": "laugh",
+     "text": "पहले मेरी चॉकलेट वापस दो, पापा!",
+     "sfx": "punchline"
+    }
+   ]
+  },
+  {
+   "place": "park",
+   "cast": [
+    "papa",
+    "mummy",
+    "chintu"
+   ],
+   "lines": [
+    {
+     "who": "mummy",
+     "emotion": "angry",
+     "text": "आज से आपकी डाइट शुरू! सिर्फ़ सलाद और नींबू पानी।",
+     "sfx": "pop"
+    },
+    {
+     "who": "papa",
+     "emotion": "sad",
+     "text": "सलाद? मैं इंसान हूँ, खरगोश नहीं!",
+     "sfx": "boing"
+    },
+    {
+     "who": "chintu",
+     "emotion": "laugh",
+     "text": "पापा, खरगोश तो कितने फिट होते हैं!",
+     "sfx": ""
+    },
+    {
+     "who": "mummy",
+     "emotion": "happy",
+     "text": "सुना? बच्चा भी समझ गया।",
+     "sfx": ""
+    },
+    {
+     "who": "papa",
+     "emotion": "neutral",
+     "text": "ठीक है... पर रात को एक छोटा सा समोसा?",
+     "sfx": ""
+    },
+    {
+     "who": "mummy",
+     "emotion": "angry",
+     "text": "एक भी नहीं!",
+     "sfx": "ding"
+    }
+   ]
+  },
+  {
+   "place": "market",
+   "cast": [
+    "papa",
+    "pinky"
+   ],
+   "lines": [
+    {
+     "who": "narrator",
+     "emotion": "neutral",
+     "text": "रात के बारह बजे...",
+     "sfx": "whoosh"
+    },
+    {
+     "who": "papa",
+     "emotion": "surprised",
+     "text": "अरे पिंकी! तुम यहाँ क्या कर रही हो?",
+     "sfx": "gasp"
+    },
+    {
+     "who": "pinky",
+     "emotion": "happy",
+     "text": "मम्मी ने कहा था, जो फ्रिज खोले, उसकी फोटो खींच लेना!",
+     "sfx": ""
+    },
+    {
+     "who": "papa",
+     "emotion": "sad",
+     "text": "पिंकी बेटा, ये फोटो डिलीट कर दो ना...",
+     "sfx": ""
+    },
+    {
+     "who": "pinky",
+     "emotion": "laugh",
+     "text": "पहले मेरी चॉकलेट वापस दो, पापा!",
+     "sfx": "punchline"
+    }
+   ]
+  },
+  {
+   "place": "classroom",
+   "cast": [
+    "papa",
+    "mummy",
+    "chintu"
+   ],
+   "lines": [
+    {
+     "who": "mummy",
+     "emotion": "angry",
+     "text": "आज से आपकी डाइट शुरू! सिर्फ़ सलाद और नींबू पानी।",
+     "sfx": "pop"
+    },
+    {
+     "who": "papa",
+     "emotion": "sad",
+     "text": "सलाद? मैं इंसान हूँ, खरगोश नहीं!",
+     "sfx": "boing"
+    },
+    {
+     "who": "chintu",
+     "emotion": "laugh",
+     "text": "पापा, खरगोश तो कितने फिट होते हैं!",
+     "sfx": ""
+    },
+    {
+     "who": "mummy",
+     "emotion": "happy",
+     "text": "सुना? बच्चा भी समझ गया।",
+     "sfx": ""
+    },
+    {
+     "who": "papa",
+     "emotion": "neutral",
+     "text": "ठीक है... पर रात को एक छोटा सा समोसा?",
+     "sfx": ""
+    },
+    {
+     "who": "mummy",
+     "emotion": "angry",
+     "text": "एक भी नहीं!",
+     "sfx": "ding"
+    }
+   ]
+  },
+  {
+   "place": "bedroom",
+   "cast": [
+    "papa",
+    "pinky"
+   ],
+   "lines": [
+    {
+     "who": "narrator",
+     "emotion": "neutral",
+     "text": "रात के बारह बजे...",
+     "sfx": "whoosh"
+    },
+    {
+     "who": "papa",
+     "emotion": "surprised",
+     "text": "अरे पिंकी! तुम यहाँ क्या कर रही हो?",
+     "sfx": "gasp"
+    },
+    {
+     "who": "pinky",
+     "emotion": "happy",
+     "text": "मम्मी ने कहा था, जो फ्रिज खोले, उसकी फोटो खींच लेना!",
+     "sfx": ""
+    },
+    {
+     "who": "papa",
+     "emotion": "sad",
+     "text": "पिंकी बेटा, ये फोटो डिलीट कर दो ना...",
+     "sfx": ""
+    },
+    {
+     "who": "pinky",
+     "emotion": "laugh",
+     "text": "पहले मेरी चॉकलेट वापस दो, पापा!",
+     "sfx": "punchline"
+    }
+   ]
+  },
+  {
+   "place": "living_room",
+   "cast": [
+    "papa",
+    "mummy",
+    "chintu"
+   ],
+   "lines": [
+    {
+     "who": "mummy",
+     "emotion": "angry",
+     "text": "आज से आपकी डाइट शुरू! सिर्फ़ सलाद और नींबू पानी।",
+     "sfx": "pop"
+    },
+    {
+     "who": "papa",
+     "emotion": "sad",
+     "text": "सलाद? मैं इंसान हूँ, खरगोश नहीं!",
+     "sfx": "boing"
+    },
+    {
+     "who": "chintu",
+     "emotion": "laugh",
+     "text": "पापा, खरगोश तो कितने फिट होते हैं!",
+     "sfx": ""
+    },
+    {
+     "who": "mummy",
+     "emotion": "happy",
+     "text": "सुना? बच्चा भी समझ गया।",
+     "sfx": ""
+    },
+    {
+     "who": "papa",
+     "emotion": "neutral",
+     "text": "ठीक है... पर रात को एक छोटा सा समोसा?",
+     "sfx": ""
+    },
+    {
+     "who": "mummy",
+     "emotion": "angry",
+     "text": "एक भी नहीं!",
+     "sfx": "ding"
+    }
+   ]
+  },
+  {
+   "place": "kitchen",
+   "cast": [
+    "papa",
+    "pinky"
+   ],
+   "lines": [
+    {
+     "who": "narrator",
+     "emotion": "neutral",
+     "text": "रात के बारह बजे...",
+     "sfx": "whoosh"
+    },
+    {
+     "who": "papa",
+     "emotion": "surprised",
+     "text": "अरे पिंकी! तुम यहाँ क्या कर रही हो?",
+     "sfx": "gasp"
+    },
+    {
+     "who": "pinky",
+     "emotion": "happy",
+     "text": "मम्मी ने कहा था, जो फ्रिज खोले, उसकी फोटो खींच लेना!",
+     "sfx": ""
+    },
+    {
+     "who": "papa",
+     "emotion": "sad",
+     "text": "पिंकी बेटा, ये फोटो डिलीट कर दो ना...",
+     "sfx": ""
+    },
+    {
+     "who": "pinky",
+     "emotion": "laugh",
+     "text": "पहले मेरी चॉकलेट वापस दो, पापा!",
+     "sfx": "punchline"
+    }
+   ]
+  }
+ ]
+}
